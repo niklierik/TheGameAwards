@@ -1,0 +1,537 @@
+/* 
+    Alap formázások vannak itt eltárolva, illetve a custom tag-eké is, mert problémás lenne azokat külön fájlba rakni, és a main.css 
+    úgy van tervezve, hogy mindenhol ott lesz
+
+*/
+
+
+/*
+    Ez elvileg kompatibilitásba segít, azt mondta az internet népe
+*/
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+
+/*
+    Cím formázása (kép és szöveg)
+*/
+
+.title {
+    /*
+        Középre igazítja a szöveget
+    */
+    text-align: center;
+    /*
+        Ezeket a fontokat próbálja beállítani ebben a prioritási sorrendbe
+    */
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    /*
+        Navy színű háttér
+    */
+    background-color: #204781;
+    /*
+        A szöveg színe
+    */
+    color: #EEEEEE;
+    /*
+        Font mérete
+    */
+    font-size: xx-large;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+    z-index: 1;
+    height: fit-content;
+    display: block;
+    margin: 0px;
+    padding: 0px;
+    top: 0;
+    position: fixed;
+    height: 75px;
+}
+
+.first {
+    padding-top: 75px;
+}
+
+.last {
+    padding-bottom: 40px;
+}
+
+.main_main_div {
+    display: inline-flex;
+    width: 100%;
+}
+
+main {
+    width: 78%;
+    float: left;
+}
+
+#nav_div {
+    background-color: #204781;
+    margin-bottom: 0;
+    top: 75px;
+    float: right;
+    width: 20%;
+    height: 100%;
+    right: 0px;
+    position: fixed;
+    display: block;
+    z-index: 2;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+
+/*
+    A header logoi
+*/
+
+#title_logo1,
+#title_logo2 {
+    width: 50px;
+    height: 50px;
+    margin: 0;
+}
+
+
+/*
+    A header képje
+*/
+
+.title_img_span img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+}
+
+
+/*
+    Főleg az actual tartalom használja
+*/
+
+p {
+    text-align: justify;
+    padding: 0px 10px;
+    margin: 5px;
+}
+
+h1 {
+    margin: 0px;
+    padding: 0px;
+}
+
+h2 {
+    font-size: 30px;
+    padding: 5px;
+}
+
+nav {
+    margin-right: 0px;
+    z-index: 1;
+    display: block;
+}
+
+div .fortable {
+    width: 100%;
+    margin: 20px;
+}
+
+table {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+
+/*
+    Beállítja a html body belső és külső margókat 0-ra
+*/
+
+body {
+    /* a margó mérete*/
+    margin: 0;
+    /* a belső margó mérete */
+    padding: 0;
+    /* a szegély mérete */
+    border: 0;
+    /* a háttérszíne a weboldalnak */
+    background-color: rgba(0, 0, 0, 0.918);
+    /* a szöveg alapértelmezett színe a weboldalon */
+    color: rgb(74, 164, 194);
+    overflow-wrap: normal;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+}
+
+
+/* Ezzel lesz majd eldúgva a titkos dolog */
+
+.secret {
+    display: none !important;
+}
+
+input[type="submit"],
+button {
+    /* Relatív pozíció (a szülő objektumtól függ) */
+    position: relative;
+    /* 15px-nyi margó minden irányba */
+    margin: 5px;
+    /* Belső margó 15px fent-lent 30px bal-jobb irányba */
+    padding: 15px 30px;
+    /* középre igazított szövegek */
+    text-align: center;
+    /* betűméret 18px */
+    font-size: 18px;
+    /* betű közt hely 1px */
+    letter-spacing: 1px;
+    /* nincs szövegdíszítés */
+    text-decoration: none;
+    /* szöveg színe */
+    color: #EEEEEE;
+    /* átlátszó háttér */
+    background: transparent;
+    /* beállítja a kurzort az ujjal mutatósra (nem a középső ujjasra, az sajna nincs :c) */
+    cursor: pointer;
+    /* "animáció" szerűség, 0.5 másodpercig tart és a végére lassul be */
+    transition: ease-out 0.5s;
+    /* szegély */
+    border: 1px solid #00ADB5;
+    /* belső árnyék, ezzel érjük el, hogy ki legyen töltve a gomb belseje (jelenleg nincs) */
+    box-shadow: inset 0 0 0 0 #00ADB5;
+    z-index: 2;
+}
+
+button {
+    width: 100%;
+    display: block;
+}
+
+
+/*gomb, ha rajta van az egér*/
+
+.active button,
+input[type="submit"]:hover,
+button:hover {
+    /* szöveg színe */
+    color: black;
+    /* belső árnyék, ezzel érjük el, hogy ki legyen töltve a gomb belseje (jelenleg ki van töltve teljesen) */
+    box-shadow: inset 0 -100px 0 0 #00ADB5;
+}
+
+.active button:hover {
+    box-shadow: inset 0 -100px 0 0 #186064;
+    border: 1px solid #186064;
+    color: white;
+}
+
+
+/* gomb, ha megnyomjuk */
+
+input[type="submit"]:active,
+button:active {
+    /* átméretezi a gombot */
+    transform: scale(0.9);
+}
+
+
+/*
+    <span class="vl">|</span>-ből csinál tényleges függőleges vonalat (attól lesz tényleges, hogy nagyobb lol)
+*/
+
+.vl {
+    /* beállítja a méretet */
+    font-size: 60px;
+    /* relatív pozició */
+    position: relative;
+    /* 10px-el tolja el fentről */
+    top: 10px;
+}
+
+a,
+a:visited {
+    /* szöveg színe*/
+    color: #FFD369;
+    /* nincs szöveg-dekoráció (pl. aláhúzás) */
+    text-decoration: none;
+}
+
+a:hover,
+a:visited:hover {
+    /* szöveg színe*/
+    color: red;
+    /* nincs szöveg-dekoráció (pl. aláhúzás) */
+    text-decoration: none;
+}
+
+.foot {
+    /* háttérszín */
+    background-color: gray;
+    /* a teljes szélességet kitölti */
+    width: 100%;
+    /* 40px magasság */
+    height: 40px;
+    margin: 0;
+    bottom: 0px;
+    clear: both;
+    color: black;
+    position: fixed;
+}
+
+.foot p {
+    /* betűt középre igazítja */
+    text-align: center;
+    /* a betű mérete */
+    font-size: 15px;
+    /* a szöveget függőlegesen mozgatja */
+    line-height: 40px;
+}
+
+
+/*
+    a forráslista css beállításai
+*/
+
+#srclist {
+    /* ha jól értem, akkor összehúzódik az általa elfoglalt hely annyira, amennyi szükséges, és így nem fogja a bal szélére kivágni a bogyókat a listaelemek előtt */
+    display: inline-block;
+    /* külső margó */
+    margin: 0;
+    /* belső margó */
+    padding: 0;
+    /* Internet Explorernek kell kekw */
+    zoom: 1;
+}
+
+
+/*
+    a forráslista elemeinek css beállításai (belső margó)
+*/
+
+#srclist li {
+    padding: 2px 5px;
+}
+
+
+/* a forráslista div-je (középre igazítja a szöveget) */
+
+#srcdiv {
+    text-align: center;
+}
+
+
+/*
+    Táblázatok beállításai
+*/
+
+table,
+tr,
+th,
+td {
+    /* Szegély */
+    border: 1px solid #222831;
+    /* Margó */
+    margin: 0px;
+    /* Vonja össze a szegélyeket */
+    border-collapse: collapse;
+}
+
+
+/* Fejléc beállításai */
+
+th {
+    background-color: #040811;
+}
+
+
+/* Alap cellák beállításai */
+
+td {
+    background-color: #141416;
+}
+
+
+/* Cellák belső margója és, hogy a szöveg legyen középre igazítva*/
+
+th,
+td {
+    padding: 5px 10px;
+    text-align: center;
+}
+
+.navelement {
+    text-align: center;
+    justify-content: center;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    z-index: 3;
+    font-size: 15px;
+}
+
+div.year,
+div.game {
+    margin: 0;
+    padding: 0;
+}
+
+#gobackwrapper {
+    width: 100%;
+    clear: both;
+    display: block;
+}
+
+#goback {
+    float: right;
+    display: block;
+    right: 10px;
+}
+
+.navelement.game .gamename {
+    transition: ease-out 0.5s;
+    opacity: 0;
+    line-height: inherit;
+    text-align: center;
+    overflow: hidden;
+    width: 0;
+    height: 0;
+    margin: 0px;
+    padding: 0px;
+    font-size: 0px;
+    font-weight: 0px;
+}
+
+.navelement.game:hover .gamename {
+    transition: ease-out 0.5s;
+    opacity: 1;
+    font-size: inherit;
+    text-align: center;
+    align-self: center;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    font-weight: 0px;
+}
+
+.navelement.game:hover .gamename,
+.navelement.game .year {
+    font-size: 15px;
+}
+
+.navelement.game:hover .year {
+    color: #00adb5;
+}
+
+my-footer {
+    display: block;
+    position: relative;
+    height: 100%;
+    z-index: 0;
+}
+
+#login_form {
+    width: 100%;
+}
+
+#login_form form {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    display: block;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}
+
+#login_form p {
+    margin: 10px 30px;
+    font-size: 20px;
+}
+
+#login_form input[type="text"],
+#login_form input[type="password"] {
+    background-color: black;
+    color: white;
+    border: 1px solid gray;
+}
+
+#login_form input[type="text"]:focus,
+#login_form input[type="password"]:focus {
+    background-color: rgb(27, 27, 27);
+    color: white;
+    border: 1px solid rgb(216, 207, 207);
+}
+
+.gameimg {
+    position: relative;
+    left: 50%;
+    height: 100px;
+    transform: translate(-50%, 0);
+    width: auto;
+    margin: 10px;
+}
+
+
+/*
+Félúton rájöttem, hogy ez értelmesebb név, de már nem akartam átnevezgetni
+*/
+
+.videodiv,
+.gameplaydiv,
+.trailerdiv {
+    width: 100%;
+}
+
+.video,
+.gameplay,
+.trailer {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+.txtcenter {
+    text-align: center;
+    color: white;
+}
+
+.titleimg {
+    width: 100%;
+    margin: 15px;
+}
+
+.titlediv {
+    float: right;
+    width: 20%;
+    margin: 5px;
+}
+
+.imgdesc {
+    font-size: smaller;
+    text-align: center;
+    color: white;
+}
+
+strong {
+    font-weight: bolder;
+    text-decoration: underline;
+}
