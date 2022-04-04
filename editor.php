@@ -20,7 +20,6 @@
     <!--
         JavaScript importok (jQuery és CustomTag-ek)
     -->
-    <script src="scripts/CustomTags.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="scripts/Animations.js"></script>
 </head>
@@ -62,8 +61,9 @@ include "common/header.php";
     include "common/navigation.php";
     ?>
 </div>
-<my-footer></my-footer>
-
+<?php
+include "common/footer.php";
+?>
 </body>
 
 </html>
