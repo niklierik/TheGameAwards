@@ -1,21 +1,42 @@
 <?php
 
-$array=[14,15,16,17,18,19,20,21];
+$year = [14 => "Dragon Age: Inquisiton", 15 => "The Witcher 3: Wild Hunt", 16 => "Overwatch", 17 => "The Legend of Zelda:<br>Breath of The Wild", 18 => "God of War", 19 => "Sekiro: Shadows Die Twice", 20 => "The Last of Us Part II", 21 => "It Takes Two"];
 
-echo "<div id=\"nav_div\"><nav>
-    <a class=\"navelement\" href=\"index.php\"><button>Főoldal</button></a>
-    <a class=\"navelement\" href=\"sources.php\"><button>Források</button></a>
-    <hr>
-    <button id=\"showgames\">Játékok</button>
-    <a class=\"navelement secret\" href=\"template.php\"><button>Sablon-oldal</button></a>";
-foreach($array as $g){
-    echo "<a class=\"navelement game\" href=\"game_20$g.php\" id=\"a$g\"><button><span class=\"year\" id=\"y14\">20$g</span><br><span class=\"gamename\" id=\"n$g\">Dragon Age: Inquisition</span></button></a>";
+
+echo "<div id=\"nav_div\"><nav>";
+navBtn("index.php", "Főoldal");
+navBtn("sources.php", "Források");
+echo "<hr>";
+echo "<button id='showgames'>Játékok</button>";
+foreach ($year as $y => $g) {
+    //echo "<a class=\"navelement game\" href=\"game_20$y.php\" id=\"a$y\"><button><span class=\"year\" id=\"y14\">20$y</span><br><span class=\"gamename\" id=\"n$y\">$g</span></button></a>";
+    navBtnGame($y, $g);
 }
 
-    echo "<hr>
-    <button id=\"showeditor\">Szerkesztői<br>Opciók</button>
-    <a class=\"navelement editor\" href=\"editor.php\"><button>Belépés mint<br>Szerkesztő</button></a>
-    <hr>
-    <a class=\"navelement\" href=\"#title_div\"><button>Vissza az oldal elejére</button></a>
-    <div style=\"padding-bottom: 90px\"></div>
+echo "<hr>
+    <button id=\"showeditor\">Szerkesztői<br>Opciók</button>";
+navBtn("editor.php", "Belépés mint<br>Szerkesztő", " editor");
+echo "<hr>";
+echo " <a class=\"navelement\" href=\"#title_div\"><button>Vissza az oldal elejére</button></a>
+    <div style = \"padding-bottom: 90px\"></div>
 </nav></div>";
+
+function navBtnGame(string $y, string $g)
+{
+    $current_doc = basename($_SERVER["PHP_SELF"]);
+    $c = "";
+    if ($current_doc === "game_20$y.php") {
+        $c = " active";
+    }
+    echo "<a class=\"navelement game$c\" href=\"game_20$y.php\" id=\"a$y\"><button><span class=\"year\" id=\"y14\">20$y</span><br><span class=\"gamename\" id=\"n$y\">$g</span></button></a>";
+}
+
+function navBtn(string $page, string $text, string $cssClass = ""): void
+{
+    $current_doc = basename($_SERVER["PHP_SELF"]);
+    $c = "";
+    if ($current_doc === $page) {
+        $c = " active";
+    }
+    echo "<a class=\"navelement$c$cssClass\" href=\"$page\"><button>$text</button></a>";
+}

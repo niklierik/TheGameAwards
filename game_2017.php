@@ -7,12 +7,9 @@
         The Legend of Zelda: Breath of The Wild
     </title>
 
-    <link href="css/main.css" rel="stylesheet" type="text/css">
-    <link rel="icon" href="img/icon.png" type="image/x-icon">
-
-    <script src="scripts/CustomTags.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="scripts/Animations.js"></script>
+    <?php
+    include "common/imports.php";
+    ?>
 
 </head>
 
