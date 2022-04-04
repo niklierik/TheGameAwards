@@ -16,6 +16,7 @@ foreach ($year as $y => $g) {
 echo "<hr>
     <button id=\"showeditor\">Szerkesztői<br>Opciók</button>";
 navBtn("login.php", "Belépés mint<br>Szerkesztő", " editor");
+navBtn("register.php", "Regisztrálás mint<br>Szerkesztő", " editor");
 echo "<hr>";
 echo " <a class=\"navelement\" href=\"#title_div\"><button>Vissza az oldal elejére</button></a>
     <div style = \"padding-bottom: 90px\"></div>
