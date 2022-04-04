@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<!-- FŐOLDAL -->
+
+<?php
+    include_once "common/utils.php";
+?>
 <html lang="hu">
 
 <head>
