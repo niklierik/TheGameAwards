@@ -41,7 +41,7 @@ include "common/header.php";
             <p class="secret">
                 admin, admin nem megy, ne próbáld meg plez, mert nem megy, feleslegesen próbálod meg c:
             </p>
-            <form method="POST" autocomplete="off">
+            <form action="login.php" method="POST" autocomplete="off">
                 <label for="uname">Felhasználónév</label><br>
                 <input name="uname" id="uname" type="text" placeholder="admin"><br>
                 <label for="pwd">Jelszó</label><br>
