@@ -1,8 +1,10 @@
 tagsToFadeIn = "p, h2, table, li, form, iframe, img, h4";
 
 duration = 500;
-var path = window.location.pathname;
-var page = path.split("/").pop();
+let path = window.location.pathname;
+let page = path.split("/").pop();
+
+let editorPages = ["login.php", "register.php"];
 
 $(document).ready(
     function () {
@@ -10,7 +12,7 @@ $(document).ready(
         if (!page.startsWith("game_")) {
             $(".navelement.game").hide();
         }
-        if (!page.startsWith("editor")) {
+        if (!editorPages.includes(page)) {
             $(".navelement.editor").hide();
         }
         $(tagsToFadeIn).each(

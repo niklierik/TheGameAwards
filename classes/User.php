@@ -2,34 +2,39 @@
 
 class User
 {
-    private string $user;
+    private string $name;
     private string $pwd;
+    private string $email;
+    private bool $valid = true;
+
+    private static array $users = [];
 
     /**
      * @param string $user
      * @param string $pwd
      */
-    public function __construct(string $user = "", string $pwd = "")
+    public function __construct(string $user = "", string $pwd = "", string $email = "")
     {
-        $this->user = $user;
+        $this->name = $user;
         $this->pwd = $pwd;
+        $this->email = $email;
     }
 
 
     /**
      * @return string
      */
-    public function getUser(): string
+    public function getName(): string
     {
-        return $this->user;
+        return $this->name;
     }
 
     /**
-     * @param string $user
+     * @param string $name
      */
-    public function setUser(string $user): void
+    private function setName(string $name): void
     {
-        $this->user = $user;
+        $this->name = $name;
     }
 
     /**
@@ -48,5 +53,97 @@ class User
         $this->pwd = $pwd;
     }
 
+    /**
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+
+    /**
+     * @param string $email
+     */
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    public static function unregister(User $u): void
+    {
+        $u->valid = false;
+        unset($u);
+        self::$users = array_values(self::$users);
+        self::saveUsers();
+    }
+
+    public static function loadUsers(): void
+    {
+        try {
+            $content = file_get_contents("data/users.data");
+            if ($content === false) {
+                self::$users = [];
+                return;
+            }
+            self::$users = unserialize($content);
+        } catch (Exception $e) {
+            self::$users = [];
+            return;
+        }
+    }
+
+    public static function saveUsers(): void
+    {
+        $c = serialize(self::$users);
+        $f = fopen("data/users.data", "w") or die("Unable to open file!");
+        fwrite($f, $c);
+        fclose($f);
+    }
+
+    public static function users(): array
+    {
+        return self::$users;
+    }
+
+    public static function existByName(string $name): bool
+    {
+        return self::userByName($name) !== false;
+    }
+
+    public static function userByName(string $name): User|bool
+    {
+        foreach (self::$users as $u) {
+            if ($u instanceof User) {
+                if ($u->getName() === $name) {
+                    return $u;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static function existByEmail(string $email): bool
+    {
+        return self::userByEmail($email) !== false;
+    }
+
+    public static function userByEmail(string $email): User|bool
+    {
+        foreach (self::$users as $u) {
+            if ($u instanceof User) {
+                if ($u->getEmail() === $email) {
+                    return $u;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static function registerUser(User $u): void
+    {
+        self::$users[] = $u;
+        self::saveUsers();
+    }
 
 }

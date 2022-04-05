@@ -441,44 +441,65 @@ div.game {
     color: #00adb5;
 }
 
-my-footer {
+/*my-footer {
     display: block;
     position: relative;
     height: 100%;
     z-index: 0;
-}
+}*/
 
+#register_form,
 #login_form {
     width: 100%;
 }
 
+#register_form form,
 #login_form form {
     position: relative;
     left: 50%;
     transform: translate(-50%, 0%);
+    width: 60%;
     display: block;
     justify-content: center;
     align-content: center;
     text-align: center;
 }
 
+label, input {
+    margin: 5px;
+}
+
+form {
+    display: block;
+}
+
+form div {
+    width: 100%;
+}
+
+#errors {
+
+}
+
+#errors p {
+    margin: 3px;
+}
+
+#register_form p,
 #login_form p {
     margin: 10px 30px;
     font-size: 20px;
 }
 
+#register_form input[type="text"],
+#register_form input[type="email"],
+#register_form input[type="password"],
 #login_form input[type="text"],
+#login_form input[type="email"],
 #login_form input[type="password"] {
     background-color: black;
     color: white;
     border: 1px solid gray;
-}
-
-#login_form input[type="text"]:focus,
-#login_form input[type="password"]:focus {
-    background-color: rgb(27, 27, 27);
-    color: white;
-    border: 1px solid rgb(216, 207, 207);
 }
 
 .gameimg {
@@ -490,6 +511,10 @@ my-footer {
     margin: 10px;
 }
 
+.required_star {
+    color: red;
+    font-size: smaller;
+}
 
 /*
 Félúton rájöttem, hogy ez értelmesebb név, de már nem akartam átnevezgetni
