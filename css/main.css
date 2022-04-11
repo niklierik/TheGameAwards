@@ -565,5 +565,32 @@ div#errors {
     color: white;
     background-color: red;
     width: 100%;
+    margin: 0;
+}
+
+.author {
+    display: inline-block;
+    margin: 20px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.author h2 {
+    text-align: center;
     margin: 0px;
+}
+
+.author div {
+    display: flex;
+    margin: 0px;
+}
+
+.author div img {
+    width: 32px;
+    height: 32px;
+}
+
+.author div p {
+    margin: 0;
 }

@@ -11,3 +11,15 @@ function printErrors(array $errors): void
         echo '</div>';
     }
 }
+
+function getImgName(User|string $user): string
+{
+    if (!is_string($user)) {
+        $user = $user->getName();
+    }
+    $file = "data/profile_pics/" . $user . ".png";
+    if (file_exists($file)) {
+        return $file;
+    }
+    return "data/profile_pics/_default.png";
+}

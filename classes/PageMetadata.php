@@ -5,6 +5,7 @@ class PageMetadata
     private string $game;
     private string $navname;
     private int $year;
+    private string $author = "A_Zuniverzum";
     private static array $pages = [];
 
     /**
@@ -67,6 +68,12 @@ class PageMetadata
         return "game_20$this->year.php";
     }
 
+    public function author(string $author): PageMetadata
+    {
+        $this->setAuthor($author);
+        return $this;
+    }
+
     /*
      *  Lehet hogy Ctrl+C Ctrl+V és ez miatt lehet h maradtak dolgok, amiket nem írtam át, sry
      */
@@ -75,13 +82,21 @@ class PageMetadata
     {
         self::$pages = [];
         self::$pages[] = new PageMetadata("Dragon Age: Inqusition", 14);
+        self::$pages[0]->author("Edi");
         self::$pages[] = new PageMetadata("The Witcher 3: Wild Hunt", 15, "The Witcher 3:<br>Wild Hunt");
+        self::$pages[1]->author("Erik");
         self::$pages[] = new PageMetadata("Overwatch", 16);
+        self::$pages[2]->author("Edi");
         self::$pages[] = new PageMetadata("The Legend of Zelda: Breath of The Wild", 17, "The Legend of Zelda:<br>Breath of The Wild");
+        self::$pages[3]->author("Edi");
         self::$pages[] = new PageMetadata("God of War", 18);
+        self::$pages[4]->author("Erik");
         self::$pages[] = new PageMetadata("Sekiro: Shadows Die Twice", 19);
+        self::$pages[5]->author("Edi");
         self::$pages[] = new PageMetadata("The Last of Us Part II", 20);
+        self::$pages[6]->author("Erik");
         self::$pages[] = new PageMetadata("It Takes Two", 21);
+        self::$pages[7]->author("Erik");
         self::savePages();
     }
 
@@ -95,12 +110,15 @@ class PageMetadata
             $content = file_get_contents("data/pages.data");
             if ($content === false) {
                 self::defaultPage();
+                return;
             }
             self::$pages = unserialize($content);
-            if (!isset($pages) || count(self::$pages) == 0) {
+            if (!isset(self::$pages) || count(self::$pages) == 0) {
                 self::defaultPage();
+                return;
             }
         } catch (Exception $e) {
+           // echo "Warn: " . $e->getMessage();
             self::defaultPage();
         }
     }
@@ -162,6 +180,22 @@ class PageMetadata
     public function setNavname(string $navname): void
     {
         $this->navname = $navname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthor(): string
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param string $author
+     */
+    public function setAuthor(string $author): void
+    {
+        $this->author = $author;
     }
 
 
