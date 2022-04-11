@@ -4,8 +4,7 @@ duration = 500;
 let path = window.location.pathname;
 let page = path.split("/").pop();
 
-let editorPages = ["login.php", "register.php"];
-
+let editorPages = ["login.php", "register.php", "logout.php", "profile.php", "upload.php", "avatar.php"];
 $(document).ready(
     function () {
         $(tagsToFadeIn).hide();
@@ -30,6 +29,7 @@ $(document).ready(
                 $(".navelement.editor").slideToggle(500);
             }
         );
+
         /*$(".navelement").each(
             function (i) {
                 var attr = $(this).attr("href");

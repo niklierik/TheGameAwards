@@ -46,8 +46,8 @@ if (isset($_POST["btn"])) {
         if (!preg_match("/.+@.+/", $email)) {
             $errors[] = "Az e-mail nem tűnik valós e-mailnek!";
         }
-        if (strlen($uname) < 5) {
-            $errors[] = "A felhasználónévnek legalább 5 karakterből kell állnia!";
+        if (strlen($uname) < 3) {
+            $errors[] = "A felhasználónévnek legalább 3 karakterből kell állnia!";
         }
         if (strlen($uname) > 15) {
             $errors[] = "A felhasználónévnek legfeljebb 15 karakterből kell állnia!";
@@ -72,7 +72,7 @@ if (isset($_POST["btn"])) {
                     $u->setEmail($email);
                     User::registerUser($u);
                     header("Location: profile.php");
-                    $_SESSION["user"] = $u;
+                    $_SESSION["user"] = $u->getName();
                 }
             } else {
                 $errors[] = "A megadott felhasználónév már foglalt.";

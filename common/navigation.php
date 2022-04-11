@@ -5,6 +5,7 @@ include_once "classes/PageMetadata.php";
 PageMetadata::loadPages();
 $pages = PageMetadata::getPages();
 
+
 echo "<div id=\"nav_div\"><nav>";
 navBtn("index.php", "Főoldal");
 navBtn("sources.php", "Források");
@@ -47,9 +48,10 @@ function navBtnGame(PageMetadata $p): void
 
 function navBtn(string $page, string $text, string $cssClass = ""): void
 {
+    $profile_pages = ["profile.php", "avatar.php"];
     $current_doc = basename($_SERVER["PHP_SELF"]);
     $c = "";
-    if ($current_doc === $page) {
+    if ($current_doc === $page || ($page === "profile.php" && in_array($current_doc, $profile_pages, true))) {
         $c = " active";
     }
     echo "<a class=\"navelement$c$cssClass\" href=\"$page\"><button>$text</button></a>";

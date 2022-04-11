@@ -27,7 +27,7 @@ if (isset($_POST["login"])) {
             $errors[] = "A felhasználó nem létezik.";
         } else {
             if (password_verify($pwd, $user->getPwd())) {
-                $_SESSION["user"] = $user;
+                $_SESSION["user"] = $user->getName();
                 header("Location: profile.php");
             } else {
                 $errors[] = "A jelszó hibás.";
@@ -62,9 +62,7 @@ if (isset($_POST["login"])) {
 <?php
 include "common/header.php";
 ?>
-<!--
-    Szöveges tartalom
--->
+
 <div class="main_main_div">
     <main class="textcontent main first last">
         <div id="errors">
@@ -72,7 +70,6 @@ include "common/header.php";
             printErrors($errors);
             ?>
         </div>
-        <!--action még nincs, majd PHP-ban lesz-->
         <div id="login_form">
             <p>
                 Itt tudsz belépni, mint Szerkesztő. Ezután elérhetővé válnak a Szerkesztői beállítások, mint pl. új
@@ -80,6 +77,13 @@ include "common/header.php";
             </p>
             <p class="secret">
                 admin, admin nem megy, ne próbáld meg plez, mert nem megy, feleslegesen próbálod meg c:
+                <?php
+                if (isset($_POST["uname"]) && $_POST["uname"] === "admin") {
+                    ?>
+                    Én mondtam c:
+                    <?php
+                }
+                ?>
             </p>
             <form action="login.php" method="POST" autocomplete="off">
                 <label for="uname">Felhasználónév</label><br>

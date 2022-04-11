@@ -2,35 +2,48 @@
 
 <?php
 session_start();
-if (isset($_SESSION["user"])) {
-    header("Location: profile.php");
-}
-
 include_once "common/utils.php";
 include_once "classes/User.php";
+include_once "classes/PageMetadata.php";
+if (!isset($_SESSION["user"])) {
+    header("Location: login.php");
+}
+
+User::loadUsers();
+$user = User::userByName($_SESSION["user"]);
 
 $errors = [];
-if (isset($_POST["login"])) {
-    if (!isset($_POST["uname"])) {
-        $errors[] = "Nem adtad meg a felhasználóneved.";
+if (isset($_POST["upload"])) {
+    if (!isset($_POST["gname"])) {
+        $errors[] = "Nem adtad meg a weboldal / játék nevét.";
     }
-    if (!isset($_POST["pwd"])) {
-        $errors[] = "Nem adtad meg a jelszavad.";
+    if (!isset($_POST["year"])) {
+        $errors[] = "Nem adtad meg az évet (utolsó két szám kell csak).";
     }
 
     if (count($errors) == 0) {
-        $uname = $_POST["uname"];
-        $pwd = $_POST["pwd"];
-        User::loadUsers();
-        $user = User::userByName($uname);
-        if ($user === false) {
-            $errors[] = "A felhasználó nem létezik.";
-        } else {
-            if (password_verify($pwd, $user->getPwd())) {
-                $_SESSION["user"] = $user;
-                header("Location: profile.php");
+        $theFile = $_FILES["doc"];
+        $type = strtolower(pathinfo($_FILES["doc"]["name"], PATHINFO_EXTENSION));
+        $game = $_POST["gname"];
+        $year = $_POST["year"];
+        $targetdir = "games/";
+        $targetfile = $targetdir . "game_20$year.php";
+        if (file_exists($targetfile)) {
+            $errors[] = "A fájl már létezik.";
+        }
+        if ($type !== "php") {
+            $errors[] = "A feltöltött fájlnak PHP kiterjesztéssel kell rendelkeznie.";
+        }
+        if (count($errors) == 0) {
+            if (!move_uploaded_file($_FILES["doc"]["tmp_name"], $targetfile)) {
+                $errors[] = "Nem sikerült a fájlodat feltölteni.";
             } else {
-                $errors[] = "A jelszó hibás.";
+                PageMetadata::loadPages();
+                $meta = new PageMetadata($game, $year);
+                $meta->author($user->getName());
+                PageMetadata::registerPage($meta);
+                PageMetadata::savePages();
+                header("Location: game.php?year=$year");
             }
         }
     }
@@ -75,17 +88,16 @@ include "common/header.php";
         <!--action még nincs, majd PHP-ban lesz-->
         <div id="login_form">
             <p>
-                Itt tudsz új weboldalt feltölteni.
+                Itt tudsz új weboldalt feltölteni. (Pls don't upload haxx ty.)
             </p>
-            <p class="secret">
-                admin, admin nem megy, ne próbáld meg plez, mert nem megy, feleslegesen próbálod meg c:
-            </p>
-            <form action="login.php" method="POST" autocomplete="off">
-                <label for="uname">Felhasználónév</label><br>
-                <input name="uname" id="uname" type="text" placeholder="admin" required><br>
-                <label for="pwd">Jelszó</label><br>
-                <input name="pwd" id="pwd" type="password" placeholder="admin" required><br>
-                <input name="login" id="login" type="submit" value="Belépés"><br>
+            <form action="upload.php" method="POST" autocomplete="off" enctype="multipart/form-data">
+                <label for="gname">Játék neve</label><br>
+                <input name="gname" id="gname" type="text" placeholder="Játéknév" required><br>
+                <label for="year">Évszám</label><br>
+                <input name="year" id="year" type="text" placeholder="22" required><br>
+                <label for="page">Dokumentum</label><br>
+                <input name="doc" id="doc" type="file" required><br>
+                <input name="upload" id="upload" type="submit" value="Feltöltés"><br>
             </form>
         </div>
     </main>

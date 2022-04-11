@@ -584,6 +584,10 @@ div#errors {
 .author div {
     display: flex;
     margin: 0px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    justify-self: center;
 }
 
 .author div img {
@@ -593,4 +597,34 @@ div#errors {
 
 .author div p {
     margin: 0;
+}
+
+.profile_nav {
+    position: relative;
+    width: 50%;
+    left: 50%;
+    transform: translate(-50%);
+    display: block;
+    margin: 10px;
+}
+
+.profile {
+    display: flex;
+    margin: 10px;
+    position: relative;
+    justify-self: center;
+    justify-content: center;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.profile h2 {
+    text-align: center;
+    vertical-align: center;
+    line-height: 0px;
+}
+
+.profile img {
+    width: 64px;
+    height: 64px;
 }

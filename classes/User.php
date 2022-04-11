@@ -70,9 +70,22 @@ class User
         $this->email = $email;
     }
 
+
+    public function insert(): void
+    {
+        $i = 0;
+        foreach (self::$users as $user) {
+            if ($user instanceof User) {
+                if ($user->getName() == $this->getName()) {
+                    self::$users[$i] = $user;
+                }
+            }
+            $i++;
+        }
+    }
+
     public static function unregister(User $u): void
     {
-        $u->valid = false;
         unset($u);
         self::$users = array_values(self::$users);
         self::saveUsers();
@@ -91,7 +104,7 @@ class User
         }
         try {
             $content = file_get_contents("data/users.data");
-            if ($content === false) {
+            if ($content === false || !isset($content) || $content === "") {
                 self::defaultUsers();
                 return;
             }

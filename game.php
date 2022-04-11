@@ -23,7 +23,11 @@ if (isset($_GET["year"])) {
 <head>
     <title>
         <?php
+        if (isset($page)) {
             echo $page->getGame();
+        } else {
+            echo "?";
+        }
         ?>
     </title>
     <?php
@@ -46,7 +50,7 @@ include "common/header.php";
         if ($year !== false) {
             ?>
             <div class="author">
-                <h2 >Készítette</h2>
+                <h2>Készítette</h2>
                 <div>
                     <?php
                     echo "<img src='" . getImgName($page->getAuthor()) . "'>";

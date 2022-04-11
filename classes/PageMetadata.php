@@ -74,11 +74,17 @@ class PageMetadata
         return $this;
     }
 
+    public static function registerPage(PageMetadata $u): void
+    {
+        self::$pages[] = $u;
+        self::savePages();
+    }
+
     /*
      *  Lehet hogy Ctrl+C Ctrl+V és ez miatt lehet h maradtak dolgok, amiket nem írtam át, sry
      */
 
-    private static function defaultPage(): void
+    private static function defaultPages(): void
     {
         self::$pages = [];
         self::$pages[] = new PageMetadata("Dragon Age: Inqusition", 14);
@@ -103,23 +109,23 @@ class PageMetadata
     public static function loadPages(): void
     {
         if (!file_exists("data/pages.data")) {
-            self::defaultPage();
+            self::defaultPages();
             return;
         }
         try {
             $content = file_get_contents("data/pages.data");
             if ($content === false) {
-                self::defaultPage();
+                self::defaultPages();
                 return;
             }
             self::$pages = unserialize($content);
             if (!isset(self::$pages) || count(self::$pages) == 0) {
-                self::defaultPage();
+                self::defaultPages();
                 return;
             }
         } catch (Exception $e) {
-           // echo "Warn: " . $e->getMessage();
-            self::defaultPage();
+            // echo "Warn: " . $e->getMessage();
+            self::defaultPages();
         }
     }
 
