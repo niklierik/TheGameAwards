@@ -560,3 +560,10 @@ strong {
     font-weight: bolder;
     text-decoration: underline;
 }
+
+div#errors {
+    color: white;
+    background-color: red;
+    width: 100%;
+    margin: 0px;
+}

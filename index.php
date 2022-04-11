@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <!-- FŐOLDAL -->
+<?php
+
+session_start();
+?>
 <html lang="hu">
 
 <head>
@@ -96,7 +100,7 @@ include "common/header.php";
                             2014. december 5.
                         </td>
                         <td headers="goty">
-                            <a href="game_2014.html">
+                            <a href="game.php?get=14">
                                 Dragon Age: Inquisition
                             </a>
                         </td>
@@ -115,7 +119,7 @@ include "common/header.php";
                             2015. december 3.
                         </td>
                         <td headers="goty">
-                            <a href="game_2015.html">
+                            <a href="game.php?get=15">
                                 The Witcher 3: Wild Hunt
                             </a>
                         </td>
@@ -135,7 +139,7 @@ include "common/header.php";
                             2016. december 1.
                         </td>
                         <td headers="goty">
-                            <a href="game_2016.html">
+                            <a href="game.php?get=16">
                                 Overwatch
                             </a>
                         </td>
@@ -151,7 +155,7 @@ include "common/header.php";
                             2017. december 7.
                         </td>
                         <td headers="goty">
-                            <a href="game_2017.html">
+                            <a href="game.php?get=17">
                                 The Legend of Zelda: Breath of the Wild
                             </a>
                         </td>
@@ -167,7 +171,7 @@ include "common/header.php";
                             2018. december 6.
                         </td>
                         <td headers="goty">
-                            <a href="game_2018.html">
+                            <a href="game.php?get=18">
                                 God of War
                             </a>
                         </td>
@@ -183,7 +187,7 @@ include "common/header.php";
                             2019. december 12.
                         </td>
                         <td headers="goty">
-                            <a href="game_2014.html">
+                            <a href="game.php?get=19">
                                 Sekiro: Shadows Die Twice
                             </a>
                         </td>
@@ -199,7 +203,7 @@ include "common/header.php";
                             2020. december 10.
                         </td>
                         <td headers="goty">
-                            <a href="game_2020.html">
+                            <a href="game.php?get=20">
                                 The Last of Us Part II
                             </a>
                         </td>
@@ -218,7 +222,7 @@ include "common/header.php";
                             2021. december 9.
                         </td>
                         <td headers="goty">
-                            <a href="game_2014.html">
+                            <a href="game.php?get=21">
                                 It Takes Two
                             </a>
                         </td>

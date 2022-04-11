@@ -5,7 +5,7 @@ class User
     private string $name;
     private string $pwd;
     private string $email;
-    private bool $valid = true;
+    //private bool $valid = true;
 
     private static array $users = [];
 
@@ -78,17 +78,30 @@ class User
         self::saveUsers();
     }
 
+    private static function defaultUsers(): void
+    {
+        self::$users = [];
+    }
+
     public static function loadUsers(): void
     {
+        if (!file_exists("data/users.data")) {
+            self::defaultUsers();
+            return;
+        }
         try {
             $content = file_get_contents("data/users.data");
             if ($content === false) {
-                self::$users = [];
+                self::defaultUsers();
                 return;
             }
             self::$users = unserialize($content);
+            if (!isset(self::$users)) {
+                self::defaultUsers();
+                return;
+            }
         } catch (Exception $e) {
-            self::$users = [];
+            self::defaultUsers();
             return;
         }
     }
@@ -96,9 +109,10 @@ class User
     public static function saveUsers(): void
     {
         $c = serialize(self::$users);
-        $f = fopen("data/users.data", "w") or die("Unable to open file!");
-        fwrite($f, $c);
-        fclose($f);
+        if (!is_dir("data")) {
+            mkdir("data");
+        }
+        file_put_contents("data/users.data", $c);
     }
 
     public static function users(): array

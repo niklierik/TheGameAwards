@@ -4,6 +4,11 @@
  *  Szóval tök valós, hogy van egy regisztrációs menüd ahol mindenféle jött ment fel tud regelni szerkesztőként c:
  */
 
+session_start();
+if (isset($_SESSION["user"])) {
+    header("Location: profile.php");
+}
+
 include_once "common/utils.php";
 include_once "classes/User.php";
 $errors = [];
@@ -35,10 +40,10 @@ if (isset($_POST["btn"])) {
             $errors[] = "Nem adtál meg e-mailt!";
             $email = "";
         }
-        if (!preg_match("/[A-Z0-9]+]/", $uname)) {
+        if (!preg_match("/[A-Z0-9]*/", $uname)) {
             $errors[] = "A felhasználónévben csak angol ABC betűi és számok lehetnek!";
         }
-        if (!preg_match("/.+@.+]/", $email)) {
+        if (!preg_match("/.+@.+/", $email)) {
             $errors[] = "Az e-mail nem tűnik valós e-mailnek!";
         }
         if (strlen($uname) < 5) {
@@ -59,10 +64,16 @@ if (isset($_POST["btn"])) {
         if (count($errors) == 0) {
             $u = User::userByName($uname);
             if ($u === false) {
-                $pwd = password_hash($pwd, PASSWORD_DEFAULT);
-                $u = new User($uname, $pwd);
-                $u->setEmail($email);
-                User::registerUser($u);
+                if (User::existByEmail($email)) {
+                    $errors[] = "A megadott e-mail már foglalt.";
+                } else {
+                    $pwd = password_hash($pwd, PASSWORD_DEFAULT);
+                    $u = new User($uname, $pwd);
+                    $u->setEmail($email);
+                    User::registerUser($u);
+                    header("Location: profile.php");
+                    $_SESSION["user"] = $u;
+                }
             } else {
                 $errors[] = "A megadott felhasználónév már foglalt.";
             }
@@ -98,15 +109,7 @@ include "common/header.php";
 <div class="main_main_div">
     <main class="textcontent main first last">
         <?php
-        if (count($errors) > 0) {
-            echo '<div id="errors">';
-        }
-        foreach ($errors as $err) {
-            echo "<p>$err</p>";
-        }
-        if (count($errors) > 0) {
-            echo '</div>';
-        }
+        printErrors($errors);
         ?>
         <div id="register_form">
             <form action="register.php" autocomplete="off" method="POST" enctype="multipart/form-data">
@@ -124,7 +127,8 @@ include "common/header.php";
 
                 <label for="email">E-mail <span class="required_star">*</span></label><br>
                 <!-- elv a magyar helyesírás szabályai szerint ez már ímél... -->
-                <input type="email" placeholder="E-mail" name="cpwd" id="cpwd" required value=<?php echo "'$email'"; ?>><br>
+                <input type="email" placeholder="E-mail" name="email" id="email" required
+                       value=<?php echo "'$email'"; ?>><br>
 
                 <input type="submit" value="Regisztrálás" name="btn">
 

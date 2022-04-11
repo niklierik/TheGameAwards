@@ -1,35 +1,47 @@
 <?php
 
-$year = [14 => "Dragon Age: Inquisiton", 15 => "The Witcher 3: Wild Hunt", 16 => "Overwatch", 17 => "The Legend of Zelda:<br>Breath of The Wild", 18 => "God of War", 19 => "Sekiro: Shadows Die Twice", 20 => "The Last of Us Part II", 21 => "It Takes Two"];
+include_once "classes/PageMetadata.php";
 
+PageMetadata::loadPages();
+$pages = PageMetadata::getPages();
 
 echo "<div id=\"nav_div\"><nav>";
 navBtn("index.php", "Főoldal");
 navBtn("sources.php", "Források");
 echo "<hr>";
 echo "<button id='showgames'>Játékok</button>";
-foreach ($year as $y => $g) {
+foreach ($pages as $p) {
     //echo "<a class=\"navelement game\" href=\"game_20$y.php\" id=\"a$y\"><button><span class=\"year\" id=\"y14\">20$y</span><br><span class=\"gamename\" id=\"n$y\">$g</span></button></a>";
-    navBtnGame($y, $g);
+    if ($p instanceof PageMetadata) {
+        navBtnGame($p);
+    }
 }
 
 echo "<hr>
     <button id=\"showeditor\">Szerkesztői<br>Opciók</button>";
-navBtn("login.php", "Belépés mint<br>Szerkesztő", " editor");
-navBtn("register.php", "Regisztrálás mint<br>Szerkesztő", " editor");
+
+if (isset($_SESSION["user"])) {
+    navBtn("profile.php", "Profil", " editor");
+    navBtn("logout.php", "Kijelentkezés", " editor");
+} else {
+    navBtn("login.php", "Belépés mint<br>Szerkesztő", " editor");
+    navBtn("register.php", "Regisztrálás mint<br>Szerkesztő", " editor");
+}
 echo "<hr>";
 echo " <a class=\"navelement\" href=\"#title_div\"><button>Vissza az oldal elejére</button></a>
     <div style = \"padding-bottom: 90px\"></div>
 </nav></div>";
 
-function navBtnGame(string $y, string $g)
+function navBtnGame(PageMetadata $p) : void
 {
-    $current_doc = basename($_SERVER["PHP_SELF"]);
+    $y = $p->getYear();
+    //$g = $p->getGame();
+    $gn = $p->getNavname();
     $c = "";
-    if ($current_doc === "game_20$y.php") {
+    if (isset($_GET["year"]) && $_GET["year"] == $y) {
         $c = " active";
     }
-    echo "<a class=\"navelement game$c\" href=\"game_20$y.php\" id=\"a$y\"><button><span class=\"year\" id=\"y14\">20$y</span><br><span class=\"gamename\" id=\"n$y\">$g</span></button></a>";
+    echo "<a class=\"navelement game$c\" href=\"game.php?year=$y\" id=\"a$y\"><button><span class=\"year\" id=\"y$y\">20$y</span><br><span class=\"gamename\" id=\"n$y\">$gn</span></button></a>";
 }
 
 function navBtn(string $page, string $text, string $cssClass = ""): void

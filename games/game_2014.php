@@ -1,29 +1,8 @@
-<!DOCTYPE html>
-<html lang="hu">
 
-<head>
-    <meta charset="utf-8">
-    <title>
-        Dragon Age: Inquisition
-    </title>
-
-    <?php
-    include "common/imports.php";
-    ?>
-
-</head>
-
-<body>
-<?php
-include "common/header.php";
-?>
-
-<div class="main_main_div">
-    <main class="textcontent main first last">
-        <img src="img/Dragon_Age_Inquisition.png" alt="Dragon Age: Inquisition" class="gameimg">
+        <img src="../img/Dragon_Age_Inquisition.png" alt="Dragon Age: Inquisition" class="gameimg">
 
         <div class="titlediv">
-            <img src="img/dragon.jpg" class="titleimg" alt="Dragon Age: Inquisition borítókép">
+            <img src="../img/dragon.jpg" class="titleimg" alt="Dragon Age: Inquisition borítókép">
             <p class="imgdesc">Dragon Age: Inquisition</p>
         </div>
 
@@ -72,18 +51,3 @@ include "common/header.php";
                 Gameplay bemutató
             </p>
         </div>
-
-    </main>
-
-    <?php
-    include "common/navigation.php";
-    ?>
-
-</div>
-
-<?php
-include "common/footer.php";
-?>
-</body>
-
-</html>

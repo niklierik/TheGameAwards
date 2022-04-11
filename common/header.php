@@ -8,4 +8,4 @@ echo "<header class=\"title\">
             </h1>
     </div>
 </header>
-<div id=\"dummy_for_header></div>";
+<div id=\"dummy_for_header\"></div>";

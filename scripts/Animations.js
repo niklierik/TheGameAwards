@@ -9,7 +9,7 @@ let editorPages = ["login.php", "register.php"];
 $(document).ready(
     function () {
         $(tagsToFadeIn).hide();
-        if (!page.startsWith("game_")) {
+        if (!page.startsWith("game")) {
             $(".navelement.game").hide();
         }
         if (!editorPages.includes(page)) {

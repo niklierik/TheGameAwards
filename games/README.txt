@@ -1,0 +1,1 @@
+Ezeket a weboldalakat a game_general.php-ba töltjük be, a ?year=[y] állítjuk, melyiket. (y: [14,21] egész számok lehetnek)
