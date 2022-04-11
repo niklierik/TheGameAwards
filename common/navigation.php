@@ -21,6 +21,7 @@ echo "<hr>
     <button id=\"showeditor\">Szerkesztői<br>Opciók</button>";
 
 if (isset($_SESSION["user"])) {
+    navBtn("upload.php", "Feltöltés", " editor");
     navBtn("profile.php", "Profil", " editor");
     navBtn("logout.php", "Kijelentkezés", " editor");
 } else {
@@ -32,7 +33,7 @@ echo " <a class=\"navelement\" href=\"#title_div\"><button>Vissza az oldal elej�
     <div style = \"padding-bottom: 90px\"></div>
 </nav></div>";
 
-function navBtnGame(PageMetadata $p) : void
+function navBtnGame(PageMetadata $p): void
 {
     $y = $p->getYear();
     //$g = $p->getGame();
