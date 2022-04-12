@@ -55,12 +55,7 @@ if (isset($_POST["btn"])) {
         if ($pwd !== $cpwd) {
             $errors[] = "A két jelszó nem egyezik.";
         }
-        if (strlen($pwd) < 8) {
-            $errors[] = "A jelszónak legalább 8 karakterből kell állnia!";
-        }
-        if (strlen($pwd) > 30) {
-            $errors[] = "A jelszónak legfeljebb 30 karakterből kell állnia!";
-        }
+        $errors = array_merge($errors, checkPwd($pwd));
         if (count($errors) == 0) {
             $u = User::userByName($uname);
             if ($u === false) {

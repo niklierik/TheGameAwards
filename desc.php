@@ -72,7 +72,7 @@ include "common/header.php";
             </p>
             <form action="desc.php" method="POST" autocomplete="off">
                 <label for="desc">Leírás</label><br>
-                <textarea id="desc" name="desc" rows="10" cols="50"></textarea><br>
+                <textarea id="desc" name="desc" rows="10" cols="50"><?php echo $user->getDesc(); ?></textarea><br>
                 <input name="change" id="change" type="submit" value="Kész"><br>
             </form>
         </div>

@@ -16,7 +16,6 @@ $errors = [];
 
 
 if (isset($_POST["admin"])) {
-
     $pwd = "";
     if (isset($_POST["pwd"])) {
         $pwd = $_POST["pwd"];
@@ -25,6 +24,7 @@ if (isset($_POST["admin"])) {
         $errors[] = "Nem nyert :p";
     } else {
         $user->setIsAdmin(true);
+        User::saveUsers();
     }
 }
 

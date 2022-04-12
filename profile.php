@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <?php
+
+
+/**
+ * Az érzés, amikor csinálsz egy játékokról szóló weboldalt, de a követelmények miatt egy social platform lesz :kekw:
+ */
+
 session_start();
 include_once "classes/User.php";
 include_once "common/utils.php";
@@ -46,12 +52,17 @@ include "common/header.php";
         <div class="profile_nav">
             <?php
             generateProfileData($user);
+            if ($user->isAdmin()) {
+                ?>
+                <a href="upload.php">
+                    <button>
+                        Cikk feltöltése
+                    </button>
+                </a>
+
+                <?php
+            }
             ?>
-            <a href="upload.php">
-                <button>
-                    Feltöltés
-                </button>
-            </a>
             <a href="avatar.php">
                 <button>
                     Avatar átállítása

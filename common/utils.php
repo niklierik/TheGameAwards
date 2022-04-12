@@ -62,3 +62,37 @@ function generateProfileData(User|bool $u): void
         echo "</p>";
     }
 }
+
+
+function checkPwd(string $pwd): array
+{
+    $errors = [];
+    if (strlen($pwd) < 8) {
+        $errors[] = "A jelszónak legalább 8 karakterből kell állnia.";
+    }
+    if (strlen($pwd) > 30) {
+        $errors[] = "A jelszó legfeljebb 30 karakterből állhat.";
+    }
+    for ($i = 0; $i < strlen($pwd); $i++) {
+        if (ctype_lower($pwd[$i])) {
+            $lower = true;
+        }
+        if (ctype_upper($pwd[$i])) {
+            $upper = true;
+        }
+
+        if (ctype_digit($pwd[$i])) {
+            $digit = true;
+        }
+    }
+    if (!isset($digit)) {
+        $errors[] = "A jelszónak kell tartalmaznia legalább egy számjegyet.";
+    }
+    if (!isset($lower)) {
+        $errors[] = "A jelszónak kell tartalmaznia legalább egy kisbetűt.";
+    }
+    if (!isset($upper)) {
+        $errors[] = "A jelszónak kell tartalmaznia legalább egy nagybetűt.";
+    }
+    return $errors;
+}

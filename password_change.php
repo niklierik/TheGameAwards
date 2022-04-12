@@ -36,12 +36,7 @@ if (isset($_POST["change"])) {
                 if ($old === $pwd) {
                     $errors[] = "A régi és az új jelszó ugyanaz.";
                 } else {
-                    if (strlen($pwd) < 8) {
-                        $errors[] = "A jelszónak legalább 8 karakterből kell állnia!";
-                    }
-                    if (strlen($pwd) > 30) {
-                        $errors[] = "A jelszónak legfeljebb 30 karakterből kell állnia!";
-                    }
+                    $errors = array_merge($errors, checkPwd($pwd));
                     if (count($errors) === 0) {
                         $user->setPwd(password_hash($pwd, PASSWORD_DEFAULT));
                         User::saveUsers();
@@ -103,15 +98,14 @@ include "common/header.php";
             <p>
                 Itt tudod a jelszavadat változtatni.
             </p>
-            <form action="password_change.php" method="POST" autocomplete="off"
-            /form-data">
-            <label for="oldpwd">Régi jelszó</label><br>
-            <input name="oldpwd" id="oldpwd" type="password" required><br>
-            <label for="pwd">Új jelszó</label><br>
-            <input name="pwd" id="pwd" type="password" required><br>
-            <label for="cpwd">Új jelszó mégegyszer</label><br>
-            <input name="cpwd" id="cpwd" type="password" required><br>
-            <input name="change" id="change" type="submit" value="Jelszó csere"><br>
+            <form action="password_change.php" method="POST" autocomplete="off">
+                <label for="oldpwd">Régi jelszó</label><br>
+                <input name="oldpwd" id="oldpwd" type="password" required><br>
+                <label for="pwd">Új jelszó</label><br>
+                <input name="pwd" id="pwd" type="password" required><br>
+                <label for="cpwd">Új jelszó mégegyszer</label><br>
+                <input name="cpwd" id="cpwd" type="password" required><br>
+                <input name="change" id="change" type="submit" value="Jelszó csere"><br>
             </form>
         </div>
     </main>

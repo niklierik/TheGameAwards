@@ -22,7 +22,7 @@ foreach ($pages as $p) {
 }
 
 echo "<hr>
-    <button id=\"showeditor\">Szerkesztői<br>Opciók</button>";
+    <button id=\"showeditor\">Felhasználói<br>Opciók</button>";
 
 if (isset($_SESSION["user"])) {
     profile();

@@ -12,6 +12,10 @@ if (!isset($_SESSION["user"])) {
 User::loadUsers();
 $user = User::userByName($_SESSION["user"]);
 
+if (!$user->isAdmin()) {
+    header("Location: profile.php");
+}
+
 $errors = [];
 if (isset($_POST["upload"])) {
     if (!isset($_POST["gname"])) {

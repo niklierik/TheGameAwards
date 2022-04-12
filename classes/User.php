@@ -7,6 +7,7 @@ class User
     private string $email;
     private string $desc = "";
     private bool $isAdmin = false;
+    private array $friends = [];
     //private bool $valid = true;
 
     private static array $users = [];
@@ -21,6 +22,7 @@ class User
         $this->pwd = $pwd;
         $this->email = $email;
     }
+
     /**
      * @return string
      */
