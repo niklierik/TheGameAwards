@@ -629,7 +629,7 @@ div#okay {
     margin: 10px;
 }
 
-.profile {
+div.profile {
     display: flex;
     margin: 10px;
     position: relative;
@@ -637,6 +637,10 @@ div#okay {
     justify-content: center;
     left: 50%;
     transform: translate(-50%);
+}
+
+p.profile {
+    text-align: center;
 }
 
 .profile h2 {
@@ -652,7 +656,8 @@ div#okay {
 
 .profileinnav {
     width: 100% !important;
-    background-color: black;
+    background-color: transparent;
+    color: white !important;
 }
 
 div#errors {

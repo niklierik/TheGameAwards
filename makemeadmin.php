@@ -15,18 +15,16 @@ $user = User::userByName($_SESSION["user"]);
 $errors = [];
 
 
-if (isset($_POST["change"])) {
+if (isset($_POST["admin"])) {
 
-    $desc = "";
-    if (isset($_POST["desc"])) {
-        $desc = $_POST["desc"];
+    $pwd = "";
+    if (isset($_POST["pwd"])) {
+        $pwd = $_POST["pwd"];
     }
-    if (strlen($desc) > 200) {
-        $errors[] = "A leírás 200 karakternél nem lehet hosszabb!";
+    if ($pwd !== "admin") {
+        $errors[] = "Nem nyert :p";
     } else {
-        $user->setDesc($desc);
-        User::saveUsers();
-        header("Location: profile.php");
+        $user->setIsAdmin(true);
     }
 }
 
@@ -43,7 +41,7 @@ if (isset($_POST["change"])) {
     -->
     <meta charset="utf-8">
     <title>
-        Az Év Játékai
+        Admin
     </title>
 
     <?php
@@ -66,14 +64,19 @@ include "common/header.php";
             printErrors($errors);
             ?>
         </div>
+        <?php
+        if (count($errors) === 0 && isset($_POST["admin"])) {
+            ?>
+            <p style="background-color: darkgreen;color: white;">Grat, mostmár admin vagy!</p>
+            <?php
+        }
+        ?>
         <div id="login_form">
-            <p>
-                Itt tudod változtatni a profil leírást.
-            </p>
-            <form action="desc.php" method="POST" autocomplete="off">
-                <label for="desc">Leírás</label><br>
-                <textarea id="desc" name="desc" rows="10" cols="50"></textarea><br>
-                <input name="change" id="change" type="submit" value="Kész"><br>
+            <form action="makemeadmin.php" method="POST" autocomplete="off">
+                <label for="pwd">Admin jelszó</label><br>
+                <p class="secret">pls dont write admin here</p>
+                <input name="pwd" id="pwd" type="password" placeholder="admin" required><br>
+                <input name="admin" id="admin" type="submit" value="Pls adsz modit?"><br>
             </form>
         </div>
     </main>

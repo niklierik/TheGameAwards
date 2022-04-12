@@ -44,14 +44,9 @@ include "common/header.php";
 <div class="main_main_div">
     <main class="textcontent main first last">
         <div class="profile_nav">
-            <div class="profile">
-                <img src="<?php echo getImgName($user->getName()); ?>" alt="Profile Pic">
-                <h2>
-                    <?php
-                    echo $user->getName();
-                    ?>
-                </h2>
-            </div>
+            <?php
+            generateProfileData($user);
+            ?>
             <a href="upload.php">
                 <button>
                     Feltöltés

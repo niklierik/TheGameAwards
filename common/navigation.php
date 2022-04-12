@@ -30,8 +30,8 @@ if (isset($_SESSION["user"])) {
     navBtn("profile.php", "Profil", " editor");
     navBtn("logout.php", "Kijelentkezés", " editor");
 } else {
-    navBtn("login.php", "Belépés mint<br>Szerkesztő", " editor");
-    navBtn("register.php", "Regisztrálás mint<br>Szerkesztő", " editor");
+    navBtn("login.php", "Belépés", " editor");
+    navBtn("register.php", "Regisztrálás", " editor");
 }
 echo "<hr>";
 echo " <a class=\"navelement\" href=\"#title_div\"><button>Vissza az oldal elejére</button></a>

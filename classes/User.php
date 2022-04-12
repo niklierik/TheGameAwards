@@ -5,7 +5,8 @@ class User
     private string $name;
     private string $pwd;
     private string $email;
-    private string $desc;
+    private string $desc = "";
+    private bool $isAdmin = false;
     //private bool $valid = true;
 
     private static array $users = [];
@@ -42,6 +43,22 @@ class User
     public function setDesc(string $desc): void
     {
         $this->desc = $desc;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->isAdmin;
+    }
+
+    /**
+     * @param bool $isAdmin
+     */
+    public function setIsAdmin(bool $isAdmin): void
+    {
+        $this->isAdmin = $isAdmin;
     }
 
     /**

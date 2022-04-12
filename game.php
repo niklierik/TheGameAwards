@@ -3,6 +3,7 @@
 session_start();
 
 include_once "classes/PageMetadata.php";
+include_once "classes/User.php";
 include_once "common/utils.php";
 
 if (isset($_GET["year"])) {
@@ -51,11 +52,13 @@ include "common/header.php";
             ?>
             <div class="author">
                 <h2>Készítette</h2>
-                <div>
+                <div style="display: inline-block;">
                     <?php
-                    echo "<img src='" . getImgName($page->getAuthor()) . "'>";
-                    echo "<p>" . $page->getAuthor() . "</p>";
-                    ?>
+                    if (isset($page) && $page !== false) {
+                        User::loadUsers();
+                        $author = User::userByName($page->getAuthor());
+                        generateProfileData($author);
+                    } ?>
                 </div>
             </div>
             <?php
