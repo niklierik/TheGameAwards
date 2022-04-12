@@ -5,6 +5,7 @@ class User
     private string $name;
     private string $pwd;
     private string $email;
+    private string $desc;
     //private bool $valid = true;
 
     private static array $users = [];
@@ -19,14 +20,28 @@ class User
         $this->pwd = $pwd;
         $this->email = $email;
     }
-
-
     /**
      * @return string
      */
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDesc(): string
+    {
+        return $this->desc;
+    }
+
+    /**
+     * @param string $desc
+     */
+    public function setDesc(string $desc): void
+    {
+        $this->desc = $desc;
     }
 
     /**
@@ -86,8 +101,14 @@ class User
 
     public static function unregister(User $u): void
     {
+        $userscpy = [];
+        foreach (self::$users as $user) {
+            if ($user->getName() !== $u->getName()) {
+                $userscpy[] = $user;
+            }
+        }
+        self::$users = $userscpy;
         unset($u);
-        self::$users = array_values(self::$users);
         self::saveUsers();
     }
 

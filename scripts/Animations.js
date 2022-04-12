@@ -1,17 +1,19 @@
-tagsToFadeIn = "p, h2, table, li, form, iframe, img, h4";
+//tagsToFadeIn = "p, h2, table, li, form, iframe, img, h4";
+tagsToFadeIn = "";
 
 duration = 500;
 let path = window.location.pathname;
 let page = path.split("/").pop();
 
-let editorPages = ["login.php", "register.php", "logout.php", "profile.php", "upload.php", "avatar.php"];
+let notEditorPages = ["index.php", "sources.php","games.php"];
+
 $(document).ready(
     function () {
         $(tagsToFadeIn).hide();
         if (!page.startsWith("game")) {
             $(".navelement.game").hide();
         }
-        if (!editorPages.includes(page)) {
+        if (notEditorPages.includes(page)) {
             $(".navelement.editor").hide();
         }
         $(tagsToFadeIn).each(

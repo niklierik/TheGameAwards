@@ -68,6 +68,10 @@ class PageMetadata
         return "game_20$this->year.php";
     }
 
+    /*
+     * Terv az volt, hogy a new után használom ezt a defaultPages()-nél, de úgy nem akarta megenni :c
+     * Mostmár nem írom át sima setAuthorra mert lusta vok xd
+     */
     public function author(string $author): PageMetadata
     {
         $this->setAuthor($author);
@@ -160,7 +164,7 @@ class PageMetadata
         return self::pageByYear($year) !== false;
     }
 
-    public static function pageByYear(int $year): PageMetadata|bool
+    public static function pageByYear(int|string $year): PageMetadata|bool
     {
         foreach (self::$pages as $u) {
             if ($u instanceof PageMetadata) {

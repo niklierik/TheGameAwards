@@ -36,8 +36,16 @@ if (isset($_POST["change"])) {
                 if ($old === $pwd) {
                     $errors[] = "A régi és az új jelszó ugyanaz.";
                 } else {
-                    $user->setPwd(password_hash($pwd, PASSWORD_DEFAULT));
-                    User::saveUsers();
+                    if (strlen($pwd) < 8) {
+                        $errors[] = "A jelszónak legalább 8 karakterből kell állnia!";
+                    }
+                    if (strlen($pwd) > 30) {
+                        $errors[] = "A jelszónak legfeljebb 30 karakterből kell állnia!";
+                    }
+                    if (count($errors) === 0) {
+                        $user->setPwd(password_hash($pwd, PASSWORD_DEFAULT));
+                        User::saveUsers();
+                    }
                 }
             } else {
                 $errors[] = "Nem jó a régi jelszó!";
@@ -82,9 +90,18 @@ include "common/header.php";
             printErrors($errors);
             ?>
         </div>
+        <?php
+        if (count($errors) === 0 && isset($_POST["change"])) {
+            ?>
+            <div id="okay">
+                <p>Sikeres jelszócsere!</p>
+            </div>
+            <?php
+        }
+        ?>
         <div id="login_form">
             <p>
-                Itt tudsz avatart feltölteni magadnak.
+                Itt tudod a jelszavadat változtatni.
             </p>
             <form action="password_change.php" method="POST" autocomplete="off"
             /form-data">

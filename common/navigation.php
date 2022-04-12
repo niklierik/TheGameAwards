@@ -1,6 +1,9 @@
 <?php
 
 include_once "classes/PageMetadata.php";
+include_once "classes/User.php";
+include_once "common/utils.php";
+
 
 PageMetadata::loadPages();
 $pages = PageMetadata::getPages();
@@ -22,7 +25,8 @@ echo "<hr>
     <button id=\"showeditor\">Szerkesztői<br>Opciók</button>";
 
 if (isset($_SESSION["user"])) {
-    navBtn("upload.php", "Feltöltés", " editor");
+    profile();
+    //navBtn("upload.php", "Feltöltés", " editor");
     navBtn("profile.php", "Profil", " editor");
     navBtn("logout.php", "Kijelentkezés", " editor");
 } else {
@@ -48,11 +52,25 @@ function navBtnGame(PageMetadata $p): void
 
 function navBtn(string $page, string $text, string $cssClass = ""): void
 {
-    $profile_pages = ["profile.php", "avatar.php"];
+    $profile_pages = ["profile.php", "avatar.php", "delete.php", "password_change.php", "upload.php"];
     $current_doc = basename($_SERVER["PHP_SELF"]);
     $c = "";
     if ($current_doc === $page || ($page === "profile.php" && in_array($current_doc, $profile_pages, true))) {
         $c = " active";
     }
     echo "<a class=\"navelement$c$cssClass\" href=\"$page\"><button>$text</button></a>";
+}
+
+function profile(): void
+{
+    if (isset($_SESSION["user"])) {
+        User::loadUsers();
+        $user = User::userByName($_SESSION["user"]);
+        echo "<div class='profileinnav profile navelement editor'>";
+        echo "<img src=" . getImgName($user->getName()) . ">";
+        echo "<h2>";
+        echo $user->getName();
+        echo " </h2>";
+        echo "</div>";
+    }
 }

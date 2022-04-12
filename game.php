@@ -7,7 +7,7 @@ include_once "common/utils.php";
 
 if (isset($_GET["year"])) {
     $year = $_GET["year"];
-    if (str_starts_with($year, "20")) {
+    if (str_starts_with($year, "20") && strlen($year) > 2) {
         $year = substr($year, 2);
     }
     PageMetadata::loadPages();
@@ -23,7 +23,7 @@ if (isset($_GET["year"])) {
 <head>
     <title>
         <?php
-        if (isset($page)) {
+        if (isset($page) && $year !== false) {
             echo $page->getGame();
         } else {
             echo "?";

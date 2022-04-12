@@ -45,13 +45,18 @@ include "common/header.php";
     <main class="textcontent main first last">
         <div class="profile_nav">
             <div class="profile">
-                <img src="<?php echo getImgName($user->getName()); ?>">
+                <img src="<?php echo getImgName($user->getName()); ?>" alt="Profile Pic">
                 <h2>
                     <?php
                     echo $user->getName();
                     ?>
                 </h2>
             </div>
+            <a href="upload.php">
+                <button>
+                    Feltöltés
+                </button>
+            </a>
             <a href="avatar.php">
                 <button>
                     Avatar átállítása
@@ -60,6 +65,16 @@ include "common/header.php";
             <a href="password_change.php">
                 <button>
                     Jelszó csere
+                </button>
+            </a>
+            <a href="desc.php">
+                <button>
+                    Bemutatkozás szerkesztése
+                </button>
+            </a>
+            <a href="delete.php">
+                <button class="redbtn">
+                    Fiók törlése
                 </button>
             </a>
         </div>
