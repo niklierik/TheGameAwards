@@ -113,7 +113,7 @@ include "common/header.php";
             <label for="msg">Üzenet</label><br>
             <textarea id="msg" name="msg" rows="10" cols="50"></textarea><br>
             <input name="send" id="send" type="submit" value="Elküldés"><br>
-            </form>
+            <?php echo "</form>"; ?>
             <a href="messages.php">
                 <button>
                     Vissza a keresésőhöz
