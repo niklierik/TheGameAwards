@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <?php
@@ -35,6 +34,18 @@ if (isset($_POST["search"])) {
             }
         }
     }
+} else if (isset($_POST["send"])) {
+    if (isset($_POST["msg"])) {
+
+    }
+}
+
+if (isset($_GET["with"])) {
+    $with = $_GET["with"];
+    $with = User::userByName($with);
+    if ($with === false) {
+        header("Location: messages.php");
+    }
 }
 
 function friendPanel(User $u, User $f): void
@@ -43,17 +54,7 @@ function friendPanel(User $u, User $f): void
     echo "<img alt='profilkép' src='" . getImgName($f) . "'>";
     echo "<div>";
     echo "<h2>" . $f->getName() . "</h2>";
-
-    if (User::areFriends($f, $u)) {
-        echo "<a href='addfriend.php?remove=1&friend=" . $f->getName() . "'><button class='delete'>Barát törlése</button></a>";
-    } else if (User::isFriendshipRequested($u, $f)) {
-        echo "<a href='addfriend.php?remove=1&friend=" . $f->getName() . "'><button class='delete'>Kérés visszavonása</button></a>";
-    } else if (User::isFriendshipRequested($f, $u)) {
-        echo "<a href='addfriend.php?friend=" . $f->getName() . "'><button>Kérés elfogadása</button></a>";
-    } else {
-        echo "<a href='addfriend.php?friend=" . $f->getName() . "'><button>Barátkérés</button></a>";
-    }
-    //echo "<a href='addfriend.php?friend=" . $f->getName() . "'><button></button></a>";
+    echo "<a href='messages.php?with=" . $f->getName() . "'><button>Üzenetek</button></a>";
     echo "</div>";
     echo "</div>";
 }
@@ -94,30 +95,56 @@ include "common/header.php";
             ?>
         </div>
 
-        <hr>
-
-        <?php if ($showSearchResults) { ?>
-            <!-- HA KERESETT -->
-            <?php
-            foreach ($results as $r) {
-                friendPanel($user, $r);
-            }
-            ?>
+        <!--hr-->
+        <?php if (isset($with) && $with !== false) {
+            $msgs = getMessagesOf($user, $with);
+            if ($msgs !== false && count($msgs) > 0) {
+                foreach ($msgs as $msg) {
+                    $msg = unserialize($msg);
+                    ?>
+                    <p>
+                        <?php echo $msg; ?>
+                    </p>
+                    <?php
+                }
+            } ?>
+            <hr>
+            <?php echo "<form action='messages.php?with=' method='POST' autocomplete='off'>"; ?>
+            <label for="msg">Üzenet</label><br>
+            <textarea id="msg" name="msg" rows="10" cols="50"></textarea><br>
+            <input name="send" id="send" type="submit" value="Elküldés"><br>
+            </form>
             <a href="messages.php">
                 <button>
                     Vissza a keresésőhöz
                 </button>
             </a>
-        <?php } else { ?>
-            <!-- HA NEM -->
 
-            <div id="m_form">
-                <form action="messages.php" method="POST" autocomplete="off">
-                    <label for="uname">Csevegés keresése</label><br>
-                    <input type="text" id="uname" name="uname"><br>
-                    <input name="search" id="search" type="submit" value="Keresés">
-                </form>
-            </div>
+
+        <?php } else { ?>
+            <?php if ($showSearchResults) { ?>
+                <!-- HA KERESETT -->
+                <?php
+                foreach ($results as $r) {
+                    friendPanel($user, $r);
+                }
+                ?>
+                <a href="messages.php">
+                    <button>
+                        Vissza a keresésőhöz
+                    </button>
+                </a>
+            <?php } else { ?>
+                <!-- HA NEM -->
+
+                <div id="m_form">
+                    <form action="messages.php" method="POST" autocomplete="off">
+                        <label for="uname">Csevegés keresése</label><br>
+                        <input type="text" id="uname" name="uname"><br>
+                        <input name="search" id="search" type="submit" value="Keresés">
+                    </form>
+                </div>
+            <?php } ?>
         <?php } ?>
     </main>
     <?php
