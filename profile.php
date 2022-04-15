@@ -78,10 +78,10 @@ include "common/header.php";
                     Üzenetek
                 </button>
             </a>
-            <hr>
             <?php
             if ($user->isAdmin()) {
                 ?>
+                <hr>
                 <a href="upload.php">
                     <button>
                         Cikk feltöltése

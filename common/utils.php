@@ -97,6 +97,30 @@ function checkPwd(string $pwd): array
     return $errors;
 }
 
+function msgFile(User|string|bool $a, User|string|bool $b): string
+{
+    if ($a === false || $b === false) {
+        return false;
+    }
+    if (!is_string($a)) {
+        $a = $a->getName();
+    }
+    if (!is_string($b)) {
+        $b = $b->getName();
+    }
+    if ($a === $b) {
+        if (file_exists("$a-$b.txt")) {
+            return "$a-$b.txt";
+        } else {
+            return "$a.txt";
+        }
+    } else {
+        if (file_exists("$b-$a.txt")) {
+            return "$b-$a.txt";
+        }
+        return "$a-$b.txt";
+    }
+}
 
 function getMessagesOf(User|string|bool $a, User|string|bool $b): array|bool
 {
@@ -109,25 +133,25 @@ function getMessagesOf(User|string|bool $a, User|string|bool $b): array|bool
     if (!is_string($b)) {
         $b = $b->getName();
     }
-    if ($a === $b) {
-        $msgs = readMsg("data/msgs/$b.txt");
-        if ($msgs === false) {
-            $msgs = readMsg("data/msgs/$a-$b.txt");
-            if ($msgs === false) {
-                return [];
-            }
-        }
-        return $msgs;
-    }
-    $msgs = readMsg("$a-$b.txt");
+    $msgs = readMsg(msgFile($a, $b));
     if ($msgs === false) {
-        $msgs = readMsg("$b-$a.txt");
-        if ($msgs === false) {
-            return [];
-        }
-        return $msgs;
+        return [];
     }
     return $msgs;
+}
+
+function saveMessage(User|string|bool $a, User|string|bool $b, array $msg)
+{
+    if ($a === false || $b === false) {
+        return false;
+    }
+    if (!is_string($a)) {
+        $a = $a->getName();
+    }
+    if (!is_string($b)) {
+        $b = $b->getName();
+    }
+    file_put_contents(msgFile($a, $b), implode("\n", $msg));
 }
 
 function readMsg(string $file): array|bool

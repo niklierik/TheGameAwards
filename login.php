@@ -71,25 +71,11 @@ include "common/header.php";
             ?>
         </div>
         <div id="m_form">
-            <p>
-                Itt tudsz belépni, mint Szerkesztő. Ezután elérhetővé válnak a Szerkesztői beállítások, mint pl. új
-                oldal létrehozása, meglévő szerkesztése vagy kitörlése.
-            </p>
-            <p class="secret">
-                admin, admin nem megy, ne próbáld meg plez, mert nem megy, feleslegesen próbálod meg c:
-                <?php
-                if (isset($_POST["uname"]) && $_POST["uname"] === "admin") {
-                    ?>
-                    Én mondtam c:
-                    <?php
-                }
-                ?>
-            </p>
             <form action="login.php" method="POST" autocomplete="off">
                 <label for="uname">Felhasználónév</label><br>
-                <input name="uname" id="uname" type="text" placeholder="admin" required><br>
+                <input name="uname" id="uname" type="text" placeholder="Felhasználónév" required><br>
                 <label for="pwd">Jelszó</label><br>
-                <input name="pwd" id="pwd" type="password" placeholder="admin" required><br>
+                <input name="pwd" id="pwd" type="password" placeholder="Jelszó" required><br>
                 <input name="login" id="login" type="submit" value="Belépés"><br>
             </form>
         </div>
