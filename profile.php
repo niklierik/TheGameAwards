@@ -73,6 +73,12 @@ include "common/header.php";
                     Barátok
                 </button>
             </a>
+            <a href="messages.php">
+                <button>
+                    Üzenetek
+                </button>
+            </a>
+            <hr>
             <?php
             if ($user->isAdmin()) {
                 ?>

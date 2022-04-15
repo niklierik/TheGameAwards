@@ -96,3 +96,52 @@ function checkPwd(string $pwd): array
     }
     return $errors;
 }
+
+
+function getMessagesOf(User|string|bool $a, User|string|bool $b): array|bool
+{
+    if ($a === false || $b === false) {
+        return false;
+    }
+    if (!is_string($a)) {
+        $a = $a->getName();
+    }
+    if (!is_string($b)) {
+        $b = $b->getName();
+    }
+    if ($a === $b) {
+        $msgs = readMsg("data/msgs/$b.txt");
+        if ($msgs === false) {
+            $msgs = readMsg("data/msgs/$a-$b.txt");
+            if ($msgs === false) {
+                return [];
+            }
+        }
+        return $msgs;
+    }
+    $msgs = readMsg("$a-$b.txt");
+    if ($msgs === false) {
+        $msgs = readMsg("$b-$a.txt");
+        if ($msgs === false) {
+            return [];
+        }
+        return $msgs;
+    }
+    return $msgs;
+}
+
+function readMsg(string $file): array|bool
+{
+    if (!file_exists($file)) {
+        return false;
+    }
+    $content = file_get_contents("$a.txt");
+    $msgs = explode("\n", $content);
+    $msgsCpy = [];
+    foreach ($msgs as $msg) {
+        if (trim($msg) != "") {
+            $msgsCpy[] = $msg;
+        }
+    }
+    return $msgsCpy;
+}
