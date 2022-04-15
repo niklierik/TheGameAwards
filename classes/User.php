@@ -64,6 +64,36 @@ class User
     }
 
     /**
+     * @return array
+     */
+    public function getFriends(): array
+    {
+        return $this->friends;
+    }
+
+    /**
+     * @param array $friends
+     */
+    public function setFriends(array $friends): void
+    {
+        $this->friends = $friends;
+    }
+
+    public function removeFriend(string|User $user): void
+    {
+        if (!is_string($user)) {
+            $user = $user->getName();
+        }
+        $cpy = [];
+        foreach ($this->getFriends() as $f) {
+            if ($user != $f) {
+                $cpy[] = $f;
+            }
+        }
+        $this->setFriends($cpy);
+    }
+
+    /**
      * @param string $name
      */
     private function setName(string $name): void
@@ -115,6 +145,16 @@ class User
                 }
             }
             $i++;
+        }
+    }
+
+    public function addFriend(User|string $u): void
+    {
+        if (!is_string($u)) {
+            $u = $u->getName();
+        }
+        if (!in_array($u, $this->friends)) {
+            $this->friends[] = $u;
         }
     }
 
@@ -211,6 +251,28 @@ class User
     {
         self::$users[] = $u;
         self::saveUsers();
+    }
+
+    public static function areFriends(User|bool $a, User|bool $b): bool
+    {
+        if ($a === false) {
+            return $b === false;
+        } else {
+            return in_array($b->getName(), $a->getFriends()) && in_array($a->getName(), $b->getFriends());
+        }
+    }
+
+    /**
+     * @param User|bool $from
+     * @param User|bool $to
+     * @return bool csak akkor ad vissza igazat ha nem barátok, de a $from bejelölte barátnak a $to-t
+     */
+    public static function isFriendshipRequested(User|bool $from, User|bool $to): bool
+    {
+        if ($from === false || $to === false) {
+            return false;
+        }
+        return in_array($to->getName(), $from->getFriends()) && !in_array($from->getFriends(), $to->getFriends());
     }
 
 }

@@ -66,7 +66,7 @@ include "common/header.php";
             printErrors($errors);
             ?>
         </div>
-        <div id="login_form">
+        <div id="m_form">
             <p>
                 Itt tudod változtatni a profil leírást.
             </p>

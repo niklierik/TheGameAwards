@@ -71,7 +71,7 @@ include "common/header.php";
             <?php
         }
         ?>
-        <div id="login_form">
+        <div id="m_form">
             <form action="makemeadmin.php" method="POST" autocomplete="off">
                 <label for="pwd">Admin jelszó</label><br>
                 <p class="secret">pls dont write admin here</p>

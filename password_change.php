@@ -94,7 +94,7 @@ include "common/header.php";
             <?php
         }
         ?>
-        <div id="login_form">
+        <div id="m_form">
             <p>
                 Itt tudod a jelszavadat változtatni.
             </p>

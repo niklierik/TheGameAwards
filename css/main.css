@@ -460,17 +460,17 @@ div.game {
 }*/
 
 #register_form,
-#login_form {
+#m_form {
     width: 100%;
 }
 
 #register_form form,
-#login_form form {
+#m_form form {
     position: relative;
     left: 50%;
     transform: translate(-50%, 0%);
     width: 60%;
-    display: block;
+    /*display: block;*/
     justify-content: center;
     align-content: center;
     text-align: center;
@@ -499,7 +499,7 @@ form div {
 }
 
 #register_form p,
-#login_form p {
+#m_form p {
     margin: 10px 30px;
     font-size: 20px;
 }
@@ -507,9 +507,9 @@ form div {
 #register_form input[type="text"],
 #register_form input[type="email"],
 #register_form input[type="password"],
-#login_form input[type="text"],
-#login_form input[type="email"],
-#login_form input[type="password"] {
+#m_form input[type="text"],
+#m_form input[type="email"],
+#m_form input[type="password"] {
     background-color: black;
     color: white;
     border: 1px solid gray;
@@ -665,4 +665,22 @@ div#errors {
     background-color: red;
     width: 100%;
     margin: 0;
+}
+
+.friend {
+    display: flex;
+    margin: 30px;
+}
+
+.friend img {
+    width: 64px;
+    height: 64px;
+}
+
+.friend div {
+    display: block;
+}
+
+.friend div h2 {
+    line-height: 0;
 }

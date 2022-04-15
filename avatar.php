@@ -68,7 +68,7 @@ include "common/header.php";
             printErrors($errors);
             ?>
         </div>
-        <div id="login_form">
+        <div id="m_form">
             <p>
                 Itt tudsz avatart feltölteni magadnak.
             </p>

@@ -51,18 +51,7 @@ include "common/header.php";
     <main class="textcontent main first last">
         <div class="profile_nav">
             <?php
-            generateProfileData($user);
-            if ($user->isAdmin()) {
-                ?>
-                <a href="upload.php">
-                    <button>
-                        Cikk feltöltése
-                    </button>
-                </a>
-
-                <?php
-            }
-            ?>
+            generateProfileData($user); ?>
             <a href="avatar.php">
                 <button>
                     Avatar átállítása
@@ -78,6 +67,25 @@ include "common/header.php";
                     Bemutatkozás szerkesztése
                 </button>
             </a>
+            <hr>
+            <a href="friends.php">
+                <button>
+                    Barátok
+                </button>
+            </a>
+            <?php
+            if ($user->isAdmin()) {
+                ?>
+                <a href="upload.php">
+                    <button>
+                        Cikk feltöltése
+                    </button>
+                </a>
+
+                <?php
+            }
+            ?>
+            <hr>
             <a href="delete.php">
                 <button class="redbtn">
                     Fiók törlése

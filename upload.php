@@ -90,7 +90,7 @@ include "common/header.php";
             ?>
         </div>
         <!--action még nincs, majd PHP-ban lesz-->
-        <div id="login_form">
+        <div id="m_form">
             <p>
                 Itt tudsz új weboldalt feltölteni. (Pls don't upload haxx ty.)
             </p>
