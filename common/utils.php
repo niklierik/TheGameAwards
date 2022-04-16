@@ -99,6 +99,13 @@ function checkPwd(string $pwd): array
 
 function msgFile(User|string|bool $a, User|string|bool $b): string
 {
+
+    if (!file_exists("data")) {
+        mkdir("data");
+    }
+    if (!file_exists("data/msgs")) {
+        mkdir("data/msgs");
+    }
     if ($a === false || $b === false) {
         return false;
     }
@@ -109,16 +116,16 @@ function msgFile(User|string|bool $a, User|string|bool $b): string
         $b = $b->getName();
     }
     if ($a === $b) {
-        if (file_exists("$a-$b.txt")) {
-            return "$a-$b.txt";
+        if (file_exists("data/msgs/$a-$b.txt")) {
+            return "data/msgs/$a-$b.txt";
         } else {
-            return "$a.txt";
+            return "data/msgs/$a.txt";
         }
     } else {
-        if (file_exists("$b-$a.txt")) {
-            return "$b-$a.txt";
+        if (file_exists("data/msgs/$b-$a.txt")) {
+            return "data/msgs/$b-$a.txt";
         }
-        return "$a-$b.txt";
+        return "data/msgs/$a-$b.txt";
     }
 }
 
@@ -159,7 +166,7 @@ function readMsg(string $file): array|bool
     if (!file_exists($file)) {
         return false;
     }
-    $content = file_get_contents("$a.txt");
+    $content = file_get_contents("$file");
     $msgs = explode("\n", $content);
     $msgsCpy = [];
     foreach ($msgs as $msg) {

@@ -36,7 +36,11 @@ if (isset($_POST["search"])) {
     }
 } else if (isset($_POST["send"])) {
     if (isset($_POST["msg"])) {
-
+        $msg = $_POST["msg"];
+        $msg = "[" . date("Y.m.d H:i:s") . "] " . $user->getName() . ": " . htmlspecialchars($msg);
+        $msgs = getMessagesOf($user, $_GET["with"]);
+        $msgs[] = $msg;
+        saveMessage($user, $_GET["with"], $msgs);
     }
 }
 
@@ -71,7 +75,7 @@ function friendPanel(User $u, User $f): void
     -->
     <meta charset="utf-8">
     <title>
-        Az Év Játékai
+        Üzenetek
     </title>
 
     <?php
@@ -100,7 +104,6 @@ include "common/header.php";
             $msgs = getMessagesOf($user, $with);
             if ($msgs !== false && count($msgs) > 0) {
                 foreach ($msgs as $msg) {
-                    $msg = unserialize($msg);
                     ?>
                     <p>
                         <?php echo $msg; ?>
@@ -109,7 +112,7 @@ include "common/header.php";
                 }
             } ?>
             <hr>
-            <?php echo "<form action='messages.php?with=' method='POST' autocomplete='off'>"; ?>
+            <?php echo "<form action='messages.php?with=" . $with->getName() . "' method='POST' autocomplete='off'>"; ?>
             <label for="msg">Üzenet</label><br>
             <textarea id="msg" name="msg" rows="10" cols="50"></textarea><br>
             <input name="send" id="send" type="submit" value="Elküldés"><br>
